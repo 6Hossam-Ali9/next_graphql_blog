@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import moment from "moment";
-import { maxHeaderSize } from "http";
 function PostDetail({ post }: any) {
   const getContentFragment = (index: any, text: any, obj: any, type?: any) => {
     let modifiedText = text;

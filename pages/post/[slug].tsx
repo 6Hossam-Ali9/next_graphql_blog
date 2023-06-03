@@ -30,9 +30,6 @@ export const getStaticPaths = async () => {
   };
 };
 function PostDetails({ post }: any) {
-  const similarPosts: string[] = post.categories.map(
-    (category: any) => category.slug
-  );
   const router = useRouter();
 
   if (router.isFallback) {
@@ -52,7 +49,12 @@ function PostDetails({ post }: any) {
             </div>
             <div className="col-span-1 lg:col-span-4">
               <div className="relative lg:sticky top-8">
-                <PostWidget slug={post.slug} categories={similarPosts} />
+                <PostWidget
+                  slug={post.slug}
+                  categories={post.categories.map(
+                    (category: any) => category.slug
+                  )}
+                />
                 <Categories postCategories={post.categories} />
               </div>
             </div>

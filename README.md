@@ -19,4 +19,4 @@ This project is a blog app that can only be modified by me using hygraph, you ca
 
 ## Deployment
 
-You can have a look on the website from [here](link will be added soon)
+You can have a look on the website from [here](https://next-graphql-blog-pi.vercel.app/)
