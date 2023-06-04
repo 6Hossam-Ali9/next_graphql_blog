@@ -10,9 +10,9 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       posts,
-      fallback: true,
+      fallback: false,
     },
-    revalidate: 1,
+    // revalidate: 1,
   };
 };
 

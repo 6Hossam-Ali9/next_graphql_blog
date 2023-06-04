@@ -10,7 +10,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = categories.map(({ slug }) => ({ params: { slug } }));
   return {
     paths: paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
 
   return {
     props: { posts },
-    revalidate: 1,
+    // revalidate: 1,
   };
 };
 

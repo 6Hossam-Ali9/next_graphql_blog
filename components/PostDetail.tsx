@@ -61,15 +61,14 @@ function PostDetail({ post }: any) {
 
   return (
     <div className="bg-white shadow-lg rounded-lg p-0 lg:p-5 pb-5">
-      <div className="mb-8 w-full shadow-md lg:rounded-lg overflow-hidden">
+      <div className="relative mb-8 w-full shadow-md lg:rounded-lg overflow-hidden">
         <Image
           src={post.featuredImage.url}
           alt={post.title}
-          width={300}
-          height={300}
+          width="0"
+          height="0"
           sizes="100vw"
-          className="shadow-lg object-cover object-top"
-          style={{ position: "relative", width: "100%", height: "100%" }}
+          className="shadow-lg w-full h-auto object-cover object-top"
           priority={true}
         />
       </div>

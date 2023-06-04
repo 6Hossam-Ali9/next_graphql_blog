@@ -24,6 +24,7 @@ function Author({ author }: authorProps) {
           width={100}
           height={100}
           className="rounded-full mx-auto"
+          style={{ height: "auto", width: "auto" }}
         />
       </div>
       <h2 className="font-bold text-xl my-6 ">{author.name}</h2>

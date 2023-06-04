@@ -33,14 +33,15 @@ interface PostCardProps {
 const PostCard = ({ post }: PostCardProps) => {
   return (
     <div className="bg-white shadow-lg rounded-lg p-0 lg:p-5 pb-12 mb-8">
-      <div className="relative overflow-hidden shadow-md pb-80 mb-6">
+      <div className="relative overflow-hidden shadow-md  mb-8">
         <Image
           src={post?.featuredImage?.url}
           alt={post.title}
-          fill={true}
+          width="0"
+          height="0"
           sizes="100vw"
           priority={true}
-          className="absolute  object-cover object-top shadow-lg rounded-t-lg lg:rounded-lg"
+          className=" object-cover w-full h-auto object-top shadow-lg rounded-t-lg lg:rounded-lg"
         />
       </div>
       <h1 className="transition duration-700 text-center cursor-pointer mb-8 hover:text-pink-500 text-3xl font-semibold">
