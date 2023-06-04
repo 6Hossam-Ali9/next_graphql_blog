@@ -19,6 +19,8 @@ This project is a blog app that can only be modified by me using hygraph, you ca
 
 The project is SSG and the fallback is true which means if I made any change in the posts it will reflect directly on the blog app.
 
+There is an error with minified react and after investigating it's because a change between something in the server rendering and client rendering like (Date), you can just ignore it, and there might be an error of many requests because the limit of requests on GraphCMS.
+
 ## Deployment
 
 You can have a look on the website from [here](https://next-graphql-blog-pi.vercel.app/) and also leave a comment so I can see it and publish it

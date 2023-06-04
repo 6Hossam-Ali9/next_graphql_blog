@@ -8,17 +8,10 @@ interface commentsProps {
 
 function Comments({ slug }: commentsProps) {
   const [comments, setComments] = useState([]);
-  const [dates, setDates]: any[] = useState([]);
 
   useEffect(() => {
-    getComments(slug)
-      .then((res: any) => setComments(res))
-      .then(() =>
-        comments.map((comment: any) =>
-          setDates(moment(comment?.createdAt).format("MMM DD, YYYY"))
-        )
-      );
-  }, [slug, comments]);
+    getComments(slug).then((res: any) => setComments(res));
+  }, [slug]);
 
   return (
     <>
@@ -33,7 +26,7 @@ function Comments({ slug }: commentsProps) {
             <div key={i} className="border-b mb-4 pb-4">
               <p className="mb-4">
                 <span className="font-semibold mr-3">{comment.name}</span>
-                {dates[i]}
+                {moment(comment.createdAt).format("MMM DD, YYYY")}
               </p>
               <p className=" text-gray-600 w-full">{comment.comment}</p>
             </div>
