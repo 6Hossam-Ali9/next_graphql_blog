@@ -12,7 +12,7 @@ interface Post {
       url: string;
     };
   };
-  createdAt: Date;
+  createdAt: string;
   excerpt: string;
   slug: string;
   title: string;
