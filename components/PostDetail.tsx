@@ -65,9 +65,11 @@ function PostDetail({ post }: any) {
         <Image
           src={post.featuredImage.url}
           alt={post.title}
-          width={1000}
-          height={1000}
-          className="h-full w-full object-cover  shadow-lg "
+          width={300}
+          height={300}
+          sizes="100vw"
+          className="shadow-lg object-cover object-top"
+          style={{ position: "relative", width: "100%", height: "100%" }}
           priority={true}
         />
       </div>

@@ -37,10 +37,10 @@ const PostCard = ({ post }: PostCardProps) => {
         <Image
           src={post?.featuredImage?.url}
           alt={post.title}
-          width={1000}
-          height={1000}
+          fill={true}
+          sizes="100vw"
           priority={true}
-          className="absolute h-80 object-cover shadow-lg rounded-t-lg lg:rounded-lg"
+          className="absolute  object-cover object-top shadow-lg rounded-t-lg lg:rounded-lg"
         />
       </div>
       <h1 className="transition duration-700 text-center cursor-pointer mb-8 hover:text-pink-500 text-3xl font-semibold">

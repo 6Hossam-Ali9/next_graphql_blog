@@ -15,7 +15,6 @@ import { getPosts, getPostDetails } from "@/services";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts: any[] = await getPosts();
-  console.log("path", posts);
   const paths = posts.map(({ node: { slug } }) => ({ params: { slug } }));
   return {
     paths,
@@ -25,12 +24,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   const data = await getPostDetails(params.slug);
-  console.log("path", data);
-
   return {
     props: {
       post: data,
     },
+    revalidate: 1,
   };
 };
 

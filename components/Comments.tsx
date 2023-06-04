@@ -11,7 +11,7 @@ function Comments({ slug }: commentsProps) {
 
   useEffect(() => {
     getComments(slug).then((res: any) => setComments(res));
-  });
+  }, [slug]);
 
   return (
     <>

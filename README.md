@@ -15,7 +15,9 @@ Also, used "Lodash" library for throttling my API requests as hygraph has a very
 
 ## Usage
 
-This project is a blog app that can only be modified by me using hygraph, you can see the blogs move to any blog, you can go to a certain category and also in each blog you can see its categories and the related blogs.
+This project is a blog app that can only be modified by me using hygraph, you can see the blogs move to any blog, you can go to a certain category and also in each blog you can see its categories and the related blogs, you can submite a comment for review so, I can publish it later.
+
+The project is SSG and the fallback is true which means if I made any change in the posts it will reflect directly on the blog app.
 
 ## Deployment
 
