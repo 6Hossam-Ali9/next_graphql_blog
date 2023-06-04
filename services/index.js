@@ -3,7 +3,7 @@ import { throttle } from "lodash";
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
-export const getPosts = throttle(async () => {
+export const getPosts = async () => {
   const query = gql`
     query MyQuery {
       postsConnection {
@@ -35,9 +35,9 @@ export const getPosts = throttle(async () => {
   `;
   const result = await request(graphqlAPI, query);
   return result.postsConnection.edges;
-}, 1000);
+};
 
-export const getPostDetails = throttle(async (slug) => {
+export const getPostDetails = async (slug) => {
   const query = gql`
     query GetPostDetails($slug: String!) {
       post(where: { slug: $slug }) {
@@ -68,11 +68,11 @@ export const getPostDetails = throttle(async (slug) => {
   `;
   const result = await request(graphqlAPI, query, { slug });
   return result.post;
-}, 1000);
+};
 
-export const getRecentPosts = throttle(async () => {
+export const getRecentPosts = async () => {
   const query = gql`
-    query GetPostDetails(){
+    query GetRecentPosts(){
       posts(
         orderBy: createdAt_ASC,
         last: 3
@@ -90,11 +90,11 @@ export const getRecentPosts = throttle(async () => {
   const result = await request(graphqlAPI, query);
 
   return result.posts;
-}, 1000);
+};
 
-export const getRelatedPosts = throttle(async (categories, slug) => {
+export const getRelatedPosts = async (categories, slug) => {
   const query = gql`
-    query GetPostDetails($slug: String!, $categories: [String!]) {
+    query GetRelatedPosts($slug: String!, $categories: [String!]) {
       posts(
         where: {
           slug_not: $slug
@@ -114,9 +114,9 @@ export const getRelatedPosts = throttle(async (categories, slug) => {
   const result = await request(graphqlAPI, query, { slug, categories });
 
   return result.posts;
-}, 1000);
+};
 
-export const getCategories = throttle(async () => {
+export const getCategories = async () => {
   const query = gql`
     query GetCategories(){
       categories {
@@ -129,9 +129,9 @@ export const getCategories = throttle(async () => {
   const result = await request(graphqlAPI, query);
 
   return result.categories;
-}, 1000);
+};
 
-export const submitComment = throttle(async (obj) => {
+export const submitComment = async (obj) => {
   const result = await fetch("/api/comments", {
     method: "POST",
     headers: {
@@ -141,9 +141,9 @@ export const submitComment = throttle(async (obj) => {
   });
 
   return result.json();
-}, 1000);
+};
 
-export const getComments = throttle(async (slug) => {
+export const getComments = async (slug) => {
   const query = gql`
     query GetComments($slug: String!) {
       comments(where: { post: { slug: $slug } }) {
@@ -157,9 +157,9 @@ export const getComments = throttle(async (slug) => {
   const result = await request(graphqlAPI, query, { slug });
 
   return result.comments;
-}, 1000);
+};
 
-export const getCategoryPosts = throttle(async (slug) => {
+export const getCategoryPosts = async (slug) => {
   const query = gql`
     query GetCategoryPost($slug: String!) {
       postsConnection(where: { categories_some: { slug: $slug } }) {
@@ -194,4 +194,4 @@ export const getCategoryPosts = throttle(async (slug) => {
   const result = await request(graphqlAPI, query, { slug });
 
   return result.postsConnection.edges;
-}, 1000);
+};

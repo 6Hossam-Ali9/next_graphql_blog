@@ -1,24 +1,26 @@
 import React from "react";
 import { useRouter } from "next/router";
+import type { GetStaticProps, GetStaticPaths } from "next";
 
 import { getCategories, getCategoryPosts } from "@/services";
 import { PostCard, Categories, Loader } from "@/components";
 
-export async function getStaticProps({ params }: any) {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const categories: any[] = await getCategories();
+  const paths = categories.map(({ slug }) => ({ params: { slug } }));
+  return {
+    paths: paths,
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   const posts = await getCategoryPosts(params.slug);
 
   return {
     props: { posts },
   };
-}
-
-export async function getStaticPaths() {
-  const categories: any[] = await getCategories();
-  return {
-    paths: categories.map(({ slug }) => ({ params: { slug } })),
-    fallback: true,
-  };
-}
+};
 
 const CategoryPost = ({ posts }: any) => {
   const router = useRouter();

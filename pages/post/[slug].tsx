@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import type { GetStaticProps, GetStaticPaths } from "next";
 
 import {
   PostDetail,
@@ -12,23 +13,27 @@ import {
 } from "@/components";
 import { getPosts, getPostDetails } from "@/services";
 
-export async function getStaticProps({ params }: any) {
-  const data = await getPostDetails(params.slug);
-  return {
-    props: {
-      post: data,
-    },
-  };
-}
-
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async () => {
   const posts: any[] = await getPosts();
+  console.log("path", posts);
   const paths = posts.map(({ node: { slug } }) => ({ params: { slug } }));
   return {
     paths,
     fallback: true,
   };
 };
+
+export const getStaticProps: GetStaticProps = async ({ params }: any) => {
+  const data = await getPostDetails(params.slug);
+  console.log("path", data);
+
+  return {
+    props: {
+      post: data,
+    },
+  };
+};
+
 function PostDetails({ post }: any) {
   const router = useRouter();
 
