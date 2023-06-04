@@ -18,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = posts.map(({ node: { slug } }) => ({ params: { slug } }));
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
     props: {
       post: data,
     },
-    // revalidate: 1,
+    revalidate: 1,
   };
 };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import moment from "moment";
@@ -31,6 +31,10 @@ interface PostCardProps {
 }
 
 const PostCard = ({ post }: PostCardProps) => {
+  const [date, setDate] = useState(
+    moment(post.createdAt).format("MMM DD, YYYY")
+  );
+
   return (
     <div className="bg-white shadow-lg rounded-lg p-0 lg:p-5 pb-12 mb-8">
       <div className="relative overflow-hidden shadow-md  mb-8">
@@ -75,9 +79,7 @@ const PostCard = ({ post }: PostCardProps) => {
               d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
             />
           </svg>
-          <span className="align-middle">
-            {moment(post.createdAt).format("MMM DD, YYYY")}
-          </span>
+          <span className="align-middle">{date}</span>
         </div>
       </div>
       <p className="text-center text-lg text-gray-700 font-normal px-4 lg:px-2 mb-8">
