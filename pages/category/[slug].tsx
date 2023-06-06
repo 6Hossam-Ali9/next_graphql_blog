@@ -7,9 +7,8 @@ import { PostCard, Categories, Loader } from "@/components";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const categories: any[] = await getCategories();
-  const paths = categories.map(({ slug }) => ({ params: { slug } }));
   return {
-    paths: paths,
+    paths: categories.map(({ slug }) => ({ params: { slug } })),
     fallback: true,
   };
 };
@@ -18,7 +17,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   const posts = await getCategoryPosts(params.slug);
 
   return {
-    props: { posts },
+    props: { posts, fallback: "blocking" },
     revalidate: 1,
   };
 };

@@ -15,18 +15,18 @@ import { getPosts, getPostDetails } from "@/services";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const posts: any[] = await getPosts();
-  const paths = posts.map(({ node: { slug } }) => ({ params: { slug } }));
   return {
-    paths,
+    paths: posts.map(({ node: { slug } }) => ({ params: { slug } })),
     fallback: true,
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-  const data = await getPostDetails(params.slug);
+  const post = await getPostDetails(params.slug);
   return {
     props: {
-      post: data,
+      post,
+      fallback: "blocking",
     },
     revalidate: 1,
   };
