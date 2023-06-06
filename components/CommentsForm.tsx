@@ -48,7 +48,7 @@ function CommentsForm({ slug }: commentsFormProps) {
   return (
     <div className="bg-white p-8 rounded-lg shadow-lg mb-8">
       <h2 className="text-lg border-b pb-4 mb-8 font-bold">Add Comment</h2>
-      <form onSubmit={submitHandler}>
+      <form onSubmit={submitHandler} id="comment-form">
         <div className="grid grid-cols-1 mb-2">
           <textarea
             name="comment"
