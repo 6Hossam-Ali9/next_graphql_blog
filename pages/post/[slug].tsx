@@ -67,12 +67,16 @@ export const getStaticProps: GetStaticProps<any> = async ({
   params,
 }: GetStaticPropsContext) => {
   const post = await getPostDetails(params?.slug);
+  if (!post) {
+    return {
+      notFound: true,
+    };
+  }
   return {
     props: {
       post,
-      fallback: true,
     },
-    revalidate: 1,
+    revalidate: 10,
   };
 };
 

@@ -48,8 +48,8 @@ export const getStaticProps: GetStaticProps<any> = async ({
   const posts = await getCategoryPosts(params?.slug);
 
   return {
-    props: { posts, fallback: true },
-    revalidate: 1,
+    props: { posts },
+    revalidate: 10,
   };
 };
 
