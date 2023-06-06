@@ -4,19 +4,7 @@ import { getPosts } from "@/services";
 import { useRouter } from "next/router";
 import type { GetStaticProps } from "next";
 
-export const getStaticProps: GetStaticProps = async () => {
-  const posts: any[] = await getPosts();
-
-  return {
-    props: {
-      posts,
-      fallback: true,
-    },
-    revalidate: 1,
-  };
-};
-
-export default function Home({ posts }: any) {
+function Home({ posts }: any) {
   const router = useRouter();
 
   if (router.isFallback) {
@@ -44,3 +32,17 @@ export default function Home({ posts }: any) {
     </div>
   );
 }
+
+export const getStaticProps: GetStaticProps<any> = async () => {
+  const posts: any[] = await getPosts();
+
+  return {
+    props: {
+      posts,
+      fallback: true,
+    },
+    revalidate: 1,
+  };
+};
+
+export default Home;

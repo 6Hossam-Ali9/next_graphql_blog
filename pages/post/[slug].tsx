@@ -1,6 +1,10 @@
 import React from "react";
 import { useRouter } from "next/router";
-import type { GetStaticProps, GetStaticPaths } from "next";
+import type {
+  GetStaticProps,
+  GetStaticPaths,
+  GetStaticPropsContext,
+} from "next";
 
 import {
   PostDetail,
@@ -12,25 +16,6 @@ import {
   Loader,
 } from "@/components";
 import { getPosts, getPostDetails } from "@/services";
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const posts: any[] = await getPosts();
-  return {
-    paths: posts.map(({ node: { slug } }) => ({ params: { slug } })),
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-  const post = await getPostDetails(params.slug);
-  return {
-    props: {
-      post,
-      fallback: "blocking",
-    },
-    revalidate: 1,
-  };
-};
 
 function PostDetails({ post }: any) {
   const router = useRouter();
@@ -64,10 +49,31 @@ function PostDetails({ post }: any) {
           </div>
         </div>
       ) : (
-        <Loader />
+        <h1 className="text-center pt-40 w-full">404 | Not Found!</h1>
       )}
     </>
   );
 }
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts: any[] = await getPosts();
+  return {
+    paths: posts.map(({ node: { slug } }) => ({ params: { slug } })),
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps<any> = async ({
+  params,
+}: GetStaticPropsContext) => {
+  const post = await getPostDetails(params?.slug);
+  return {
+    props: {
+      post,
+      fallback: true,
+    },
+    revalidate: 1,
+  };
+};
 
 export default PostDetails;

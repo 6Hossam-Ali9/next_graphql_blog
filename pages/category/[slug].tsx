@@ -1,26 +1,13 @@
 import React from "react";
 import { useRouter } from "next/router";
-import type { GetStaticProps, GetStaticPaths } from "next";
+import type {
+  GetStaticProps,
+  GetStaticPaths,
+  GetStaticPropsContext,
+} from "next";
 
 import { getCategories, getCategoryPosts } from "@/services";
 import { PostCard, Categories, Loader } from "@/components";
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const categories: any[] = await getCategories();
-  return {
-    paths: categories.map(({ slug }) => ({ params: { slug } })),
-    fallback: true,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-  const posts = await getCategoryPosts(params.slug);
-
-  return {
-    props: { posts, fallback: "blocking" },
-    revalidate: 1,
-  };
-};
 
 const CategoryPost = ({ posts }: any) => {
   const router = useRouter();
@@ -46,4 +33,24 @@ const CategoryPost = ({ posts }: any) => {
     </div>
   );
 };
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const categories: any[] = await getCategories();
+  return {
+    paths: categories.map(({ slug }) => ({ params: { slug } })),
+    fallback: true,
+  };
+};
+
+export const getStaticProps: GetStaticProps<any> = async ({
+  params,
+}: GetStaticPropsContext) => {
+  const posts = await getCategoryPosts(params?.slug);
+
+  return {
+    props: { posts, fallback: true },
+    revalidate: 1,
+  };
+};
+
 export default CategoryPost;
